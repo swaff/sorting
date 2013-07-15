@@ -12,35 +12,39 @@ var ST = (function () {
      */
     var selection = function (input) {
 
-            var i = 0,
-                end = input.length - 1,
-                sorted = [];
+            var outer = 0,
+                inner = 0,
+                length = input.length,
+                end = length - 1,
+                lowestIndex,
+                lowest;
 
-            for (i; i < end; i += 1) {
+            for (outer; outer < end; outer += 1) {
 
-                // get the smallest number in the array and add
-                // to the first postion of the sorted array
-                sorted.push(input.splice(getSmallestNumberIndexFromArray(input), 1)[0]);
-            }
+                inner  = outer + 1;
+                lowestIndex = false;
+                lowest = input[outer];
+                
+                for (inner; inner < length; inner += 1) {
 
-            // there is only the largest value left in the input array, add to the
-            // sorted array
-            sorted.push(input[0]);
-            return sorted;
-        },
-        getSmallestNumberIndexFromArray = function (input) {
-            var smallest,
-                smallestIndex;
-
-            input.forEach(function (value, index) {
-                if (index === 0 || value < smallest) {
-                    smallest = value;
-                    smallestIndex = index;
+                    if (input[inner] < lowest) {
+                        lowestIndex = inner;
+                        lowest = input[lowestIndex];
+                    }
                 }
-            });
-            return smallestIndex;
-        };
 
+                if (lowestIndex !== false) {
+                    input = swap(input, outer, lowestIndex);
+                }
+            }
+            return input;
+        },
+        swap = function (arr, first, second) {
+            var temp = arr[first];
+            arr[first] = arr[second];
+            arr[second] = temp;
+            return arr;
+        };
 
     return {
         selection: selection
