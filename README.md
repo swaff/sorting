@@ -11,8 +11,7 @@ Selection
 ---------
 
 - Start with a list of numbers
-- Find the smallest number and send to the start of the list
-- Repeat
+- For a given index, search for the a smaller number in the remaining items
+    - If found swap the items
+- Repeat until the list is processed
 
-Insertion
----------
