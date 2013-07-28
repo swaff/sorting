@@ -1,7 +1,7 @@
 var ST = (function () {
 
     /**
-     * Sorting using the selection algorith
+     * Sorting using the selection algorithm
      * 1.   Start with the entire list marked as unprocessed.
      * 2.   Find the smallest element in the yet unprocessed list;
      *      swap it with the element that is in the first position of the unprocessed list;
@@ -39,6 +39,63 @@ var ST = (function () {
             }
             return input;
         },
+
+        /**
+         * Sorting using the insertion algorithm
+         *
+         * Step 1: Consider only the first element, and thus, our list is sorted.
+         * Step 2: Consider the next element; insert that element into the proper position in the already-sorted list.
+         * Step 3: Repeat this process of adding one new number for all n numbers.
+        */
+        insertion = function (input) {
+
+            input.forEach(function (item, index) {
+
+                var inner = index,
+                    found = false;
+
+                while (inner > 0 && !found) {
+
+                    // if the item is larger than it's neighbour at the lower
+                    // position, swap the two values around
+                    if (input[inner] < input[inner - 1]) {
+                        input = swap(input, inner -1, inner);
+                    } else {
+                        found = true;
+                    }
+                   inner = inner - 1;  
+                }
+            });            
+            return input;
+        },
+
+        /**
+         * Sorting using the bubble sort algorithm
+         *
+         * Step 1: Loop through all entries of the list.
+         * Step 2: Compare each entry to all successive entries and swap entries if they are out of order.
+         * Step 3: Repeat this process a total of n – 1 times.
+        */
+        bubble = function (input) {
+
+            var outer = 0, 
+                outerLength = input.length,
+                outerEnd = outerLength - 2,
+                inner;
+
+            for (outer; outer < outerEnd; outer += 1) {
+
+                inner = outer + 1;
+
+                for (inner; inner < outerLength; inner += 1) {
+                    if (input[outer] > input[inner]) {
+                        input = swap(input, inner, outer);
+                    }
+                }
+            }
+            return input;
+        },
+
         swap = function (arr, first, second) {
             var temp = arr[first];
             arr[first] = arr[second];
@@ -47,7 +104,9 @@ var ST = (function () {
         };
 
     return {
-        selection: selection
+        selection: selection,
+        insertion: insertion,
+        bubble: bubble
     };
 
 }());
