@@ -24,7 +24,7 @@ var ST = (function () {
                 inner  = outer + 1;
                 lowestIndex = false;
                 lowest = input[outer];
-                
+
                 for (inner; inner < length; inner += 1) {
 
                     if (input[inner] < lowest) {
@@ -63,9 +63,9 @@ var ST = (function () {
                     } else {
                         found = true;
                     }
-                   inner = inner - 1;  
+                   inner = inner - 1;
                 }
-            });            
+            });
             return input;
         },
 
@@ -78,7 +78,7 @@ var ST = (function () {
         */
         bubble = function (input) {
 
-            var outer = 0, 
+            var outer = 0,
                 outerLength = input.length,
                 outerEnd = outerLength - 2,
                 inner;
@@ -96,17 +96,42 @@ var ST = (function () {
             return input;
         },
 
+        /**
+         * Finds the maximum number in an array of numbers
+         */
+        findMax = function (input) {
+            return Math.max.apply(Math, input);
+        },
+
+        /**
+         * Swaps two elements at two given position in an array and
+         * returns the affected array
+         */
         swap = function (arr, first, second) {
             var temp = arr[first];
             arr[first] = arr[second];
             arr[second] = temp;
             return arr;
+        },
+
+        /**
+         * Converts a number to a string then pads left using zeros
+         * up to the given totalChars length
+         */
+        padLeft = function (number, totalChars) {
+            var numberString = number.toString();
+            return Array(totalChars - numberString.length + 1).join('0') + numberString;
         };
 
     return {
-        selection: selection,
-        insertion: insertion,
-        bubble: bubble
+        sortBy: {
+            selection: selection,
+            insertion: insertion,
+            bubble: bubble
+        },
+        findMax: findMax,
+        swap: swap,
+        padLeft: padLeft
     };
 
 }());
