@@ -151,3 +151,16 @@ test('ST.padLeft', function () {
         'pads a nine digit number to ten characters'
     );
 });
+
+test('ST.padAllLeft', function () {
+
+    deepEqual(['1', '2', '3'], ST.padAllLeft([1, 2, 3]),
+        'pads a complete array of single digit numbers');
+
+    deepEqual(['01', '02', '30'], ST.padAllLeft([1, 2, 30]),
+        'pads an array including two digit number numbers');
+
+    deepEqual(['00001', '00002', '00030', '00400', '05000', '60000'],
+        ST.padAllLeft([1, 2, 30, 400, 5000, 60000]),
+        'pads an array including mixed digit number numbers');
+});

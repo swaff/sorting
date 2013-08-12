@@ -96,6 +96,16 @@ var ST = (function () {
             return input;
         },
 
+        radix = function (input) {
+
+            var maxLength = findMax(input).toString().length,
+                paddedInput;
+
+            // create a new array containing padded strings representing
+            // the original input
+
+        },
+
         /**
          * Finds the maximum number in an array of numbers
          */
@@ -121,17 +131,34 @@ var ST = (function () {
         padLeft = function (number, totalChars) {
             var numberString = number.toString();
             return Array(totalChars - numberString.length + 1).join('0') + numberString;
+        },
+
+        /**
+         * Takes an input array of integers creates a new array of left padded strings
+         * dependant on the size of the largest value
+         */
+        padAllLeft = function (input) {
+
+            // what is the max length of the largest number (e.g. 1000 is 4)
+            var length = findMax(input).toString().length;
+
+            // return a new array containing padded items
+            return input.map(function (number) {
+                return padLeft(number, length);
+            });
         };
 
     return {
         sortBy: {
             selection: selection,
             insertion: insertion,
-            bubble: bubble
+            bubble: bubble,
+            radix: radix
         },
         findMax: findMax,
         swap: swap,
-        padLeft: padLeft
+        padLeft: padLeft,
+        padAllLeft: padAllLeft
     };
 
 }());
