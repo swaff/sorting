@@ -164,3 +164,18 @@ test('ST.padAllLeft', function () {
         ST.padAllLeft([1, 2, 30, 400, 5000, 60000]),
         'pads an array including mixed digit number numbers');
 });
+
+test('ST.flatten', function () {
+
+    deepEqual([1, 2], ST.flatten([1, 2]),
+        'handles arrays that are already flat');
+
+    deepEqual([1, 2, 3, 4], ST.flatten([[1, 2], [3, 4]]),
+        'flattens array');
+
+    deepEqual([1, 2, 3, 4], ST.flatten([[1, 2, 3], 4]),
+        'flattens mixed array');
+
+    deepEqual([1, 2, 3, 4, 5, 6], ST.flatten([[1, 2, 3, [4, 5]], 6]),
+        'flattens deep arrays');
+});

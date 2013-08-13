@@ -146,6 +146,28 @@ var ST = (function () {
             return input.map(function (number) {
                 return padLeft(number, length);
             });
+        },
+
+        /**
+         * Flattens an array
+         * e.g. [1, [2, [3, 4]]] => [1, 2, 3, 4]
+         */
+        flatten = function flatten (arr) {
+
+            var coll = [];
+            arr.forEach(function (item) {
+
+                if (isArray(item)) {
+                    coll = coll.concat(flatten(item));
+                } else {
+                    coll.push(item);
+                }
+            });
+            return coll;
+        },
+
+        isArray = function (arr) {
+            return Object.prototype.toString.call(arr) === '[object Array]';
         };
 
     return {
@@ -156,6 +178,7 @@ var ST = (function () {
             radix: radix
         },
         findMax: findMax,
+        flatten: flatten,
         swap: swap,
         padLeft: padLeft,
         padAllLeft: padAllLeft
