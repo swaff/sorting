@@ -98,12 +98,37 @@ var ST = (function () {
 
         radix = function (input) {
 
-            var maxLength = findMax(input).toString().length,
-                paddedInput;
+            if (input.length === 0) return [];
 
             // create a new array containing padded strings representing
             // the original input
+            var paddedInput = padAllLeft(input),
+                hash = {},
 
+                // what is the index of the right most unit
+                rightIndex = paddedInput[0].length - 1,
+
+                assignToHash = function (val) {
+
+                    var unit = val[rightIndex];
+
+                    if (!hash[unit]) {
+                        hash[unit] = [];
+                    }
+                    hash[unit].push(val);
+                };
+
+            while (rightIndex > -1) {
+
+                paddedInput.forEach(assignToHash);
+                paddedInput = flatten(values(hash));
+                hash = {};
+                rightIndex--;
+            }
+
+            return paddedInput.map(function (number) {
+                return parseInt(number, 10);
+            });
         },
 
         /**
@@ -168,6 +193,19 @@ var ST = (function () {
 
         isArray = function (arr) {
             return Object.prototype.toString.call(arr) === '[object Array]';
+        },
+
+        /**
+         * Takes an object and returns the values as an array
+         */
+        values = function (obj) {
+            var val = [];
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    val.push(obj[prop]);
+                }
+            }
+            return val;
         };
 
     return {
@@ -181,7 +219,8 @@ var ST = (function () {
         flatten: flatten,
         swap: swap,
         padLeft: padLeft,
-        padAllLeft: padAllLeft
+        padAllLeft: padAllLeft,
+        values: values
     };
 
 }());
