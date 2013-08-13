@@ -103,7 +103,7 @@ var ST = (function () {
             // create a new array containing padded strings representing
             // the original input
             var paddedInput = padAllLeft(input),
-                hash = {},
+                hash = [],
 
                 // what is the index of the right most unit
                 rightIndex = paddedInput[0].length - 1,
@@ -121,12 +121,13 @@ var ST = (function () {
             while (rightIndex > -1) {
 
                 paddedInput.forEach(assignToHash);
-                paddedInput = flatten(values(hash));
-                hash = {};
+                paddedInput = flatten(hash);
+                hash = [];
                 rightIndex--;
             }
 
             return paddedInput.map(function (number) {
+                console.log(number);
                 return parseInt(number, 10);
             });
         },
@@ -193,19 +194,6 @@ var ST = (function () {
 
         isArray = function (arr) {
             return Object.prototype.toString.call(arr) === '[object Array]';
-        },
-
-        /**
-         * Takes an object and returns the values as an array
-         */
-        values = function (obj) {
-            var val = [];
-            for (var prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
-                    val.push(obj[prop]);
-                }
-            }
-            return val;
         };
 
     return {
@@ -219,8 +207,7 @@ var ST = (function () {
         flatten: flatten,
         swap: swap,
         padLeft: padLeft,
-        padAllLeft: padAllLeft,
-        values: values
+        padAllLeft: padAllLeft
     };
 
 }());

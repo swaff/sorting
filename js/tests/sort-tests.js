@@ -187,15 +187,3 @@ test('ST.flatten', function () {
     deepEqual(ST.flatten([[1, 2, 3, [4, 5]], 6]), [1, 2, 3, 4, 5, 6],
         'flattens deep arrays');
 });
-
-test('ST.values', function () {
-
-    deepEqual(ST.values({}), [],
-        'empty object returns an empty array');
-
-    deepEqual(ST.values({ a: 1}), [1],
-        'handles object with single value');
-
-    deepEqual(ST.values({ a: [1, 11], b: [2, 22]}), [[1, 11], [2, 22]],
-        'handles multi value objects');
-});
