@@ -96,6 +96,12 @@ var ST = (function () {
             return input;
         },
 
+        /**
+         * Sorting using a radix search
+         * 
+         * Start with the ones digit and sort 
+         * Continue to sort for each order of magnitude until the input is sorted
+         */
         radix = function (input) {
 
             if (input.length === 0) return [];
@@ -126,8 +132,9 @@ var ST = (function () {
                 rightIndex--;
             }
 
+            // convert the string representation of the numbers
+            // back to a number type
             return paddedInput.map(function (number) {
-                console.log(number);
                 return parseInt(number, 10);
             });
         },

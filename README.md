@@ -2,7 +2,7 @@ Sorting Algorithms
 =====================
 
 
-A selection of sorting algorithms from a basic computer science book for the fun of it.
+A selection of sorting algorithms from a computer science book for the fun of it.
 
 ----------
 
@@ -28,3 +28,8 @@ Bubble
 - Loop through all entries of the list.
 - Compare each entry to all successive entries and swap entries if they are out of order.
 - Repeat this process a total of n – 1 times.
+
+Radix
+-----
+- Start with the ones digit and sort 
+- Continue to sort for each order of magnitude until the input is sorted.
